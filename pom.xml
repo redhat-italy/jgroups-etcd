@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.jgroups.etcd</groupId>
+    <artifactId>parent</artifactId>
+    <packaging>pom</packaging>
+    <name>JGroups-Parent</name>
+    <version>1.0.0-SNAPSHOT</version>
+    <url>http://www.jgroups.org</url>
+    <description>
+        JGroups ETCD implementation
+    </description>
+
+    <organization>
+        <name>JBoss, a division of Red Hat</name>
+        <url>http://www.jboss.org</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <name>Bela Ban</name>
+            <email>belaban@yahoo.com</email>
+        </developer>
+        <developer>
+            <name>Ugo Landini</name>
+            <email>ugo.landini@gmail.com</email>
+        </developer>
+        <developer>
+            <name>Fabio Marinelli</name>
+            <email>f.marinelli@gmail.com</email>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:git@github.com:belaban/jgroups-raft.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:belaban/jgroups-raft.git</developerConnection>
+        <url>https://github.com/belaban/jgroups-raft</url>
+    </scm>
+
+    <issueManagement>
+        <system>jira</system>
+        <url>https://jira.jboss.com/jira/browse/JGRP</url>
+    </issueManagement>
+
+    <distributionManagement>
+        <repository>
+            <id>jboss-releases-repository</id>
+            <name>JBoss Releases Repository</name>
+            <url>https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+    <prerequisites>
+        <maven>3.0.4</maven>
+    </prerequisites>
+
+    <repositories>
+        <repository>
+            <id>jboss-public-repository-group</id>
+            <name>JBoss Public Maven Repository Group</name>
+            <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
+
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.build.compiler.target>1.6</project.build.compiler.target>
+    <project.build.compiler.source>1.6</project.build.compiler.source>
+
+    <maven.war.plugin.version>2.2</maven.war.plugin.version>
+    <maven.surefire.plugin.version>2.14</maven.surefire.plugin.version>
+    <maven.compiler.plugin.version>2.5.1</maven.compiler.plugin.version>
+    <maven.resources.plugin.version>2.6</maven.resources.plugin.version>
+    <maven.bundle.plugin.version>2.3.7</maven.bundle.plugin.version>
+  </properties>
+
+  <modules>
+
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.11</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <defaultGoal>install</defaultGoal>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven.compiler.plugin.version}</version>
+        <configuration>
+          <source>${project.build.compiler.source}</source>
+          <target>${project.build.compiler.target}</target>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>${maven.resources.plugin.version}</version>
+        <configuration>
+          <encoding>${project.build.sourceEncoding}</encoding>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
