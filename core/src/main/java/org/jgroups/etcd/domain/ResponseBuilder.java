@@ -24,14 +24,14 @@ public class ResponseBuilder implements Response {
   }
 
   public static Response actionGet(Node node) {
-    return new ResponseBuilder("GET", node);
+    return new ResponseBuilder("get", node);
   }
 
   public static Response actionPut(Node node) {
-    return new ResponseBuilder("PUT", node);
+    return new ResponseBuilder("put", node);
   }
 
   public static Response actionDelete(Node node) {
-    return new ResponseBuilder("DELETE", node);
+    return new ResponseBuilder("delete", node);
   }
 }

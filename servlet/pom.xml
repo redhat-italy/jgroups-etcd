@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.jgroups.etcd</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>servlet</artifactId>
+  <packaging>war</packaging>
+  <name>JGroups-Etcd-Servlet</name>
+
+  <properties>
+    <context>/services</context>
+    <warSourceDirectory>${basedir}/src/main/webapp</warSourceDirectory>
+    <packagingExcludes>**/classes/OSGI-INF/**,**/classes/META-INF/**,*/debug/**</packagingExcludes>
+    <packagingIncludes />
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.jgroups.etcd</groupId>
+      <artifactId>core</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jboss.resteasy</groupId>
+      <artifactId>jaxrs-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.resteasy</groupId>
+      <artifactId>resteasy-jaxrs</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.resteasy</groupId>
+      <artifactId>resteasy-jackson2-provider</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <defaultGoal>install</defaultGoal>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>osgi</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>maven-bundle-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>bundle-manifest</id>
+                <phase>process-classes</phase>
+                <goals>
+                  <goal>manifest</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <supportedProjectTypes>
+                <supportedProjectType>war</supportedProjectType>
+              </supportedProjectTypes>
+              <instructions>
+                <Webapp-Context>${context}</Webapp-Context>
+                <Web-ContextPath>${context}</Web-ContextPath>
+
+                <Embed-Directory>WEB-INF/lib</Embed-Directory>
+                <Embed-Dependency>*;scope=compile|runtime;artifactId=!org.osgi.enterprise|org.osgi.core</Embed-Dependency>
+                <Embed-Transitive>true</Embed-Transitive>
+
+                <Import-Package>
+                  org.osgi.framework,
+                  org.osgi.util.tracker,
+                  org.eclipse.jetty.plus.jaas.spi;resolution:=optional,
+                  org.eclipse.jetty.plus.jaas.callback;resolution:=optional,
+                  org.apache.commons.logging;resolution:=optional,
+                  org.slf4j;resolution:=optional,
+                  !org.slf4j.impl,
+                  org.jgroups.etcd.api;version=${project.version},
+                  org.jgroups.etcd;version=${project.version}
+                </Import-Package>
+
+                <Bundle-ClassPath>.</Bundle-ClassPath>
+                <Bundle-Name>${project.description}</Bundle-Name>
+                <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
+
+                <Implementation-Title>example webapp</Implementation-Title>
+                <Implementation-Version>${project.version}</Implementation-Version>
+              </instructions>
+            </configuration>
+          </plugin>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <configuration>
+              <outputFileNameMapping>@{artifactId}@-@{baseVersion}@@{dashClassifier?}@.@{extension}@</outputFileNameMapping>
+              <warSourceDirectory>${warSourceDirectory}</warSourceDirectory>
+              <packagingExcludes>${packagingExcludes}</packagingExcludes>
+              <packagingIncludes>${packagingIncludes}</packagingIncludes>
+              <failOnMissingWebXml>true</failOnMissingWebXml>
+              <archive>
+                <manifestFile>${basedir}/target/classes/META-INF/MANIFEST.MF</manifestFile>
+              </archive>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+</project>

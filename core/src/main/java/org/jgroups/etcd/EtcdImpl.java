@@ -1,10 +1,9 @@
 package org.jgroups.etcd;
 
 import org.jgroups.etcd.api.Etcd;
-import org.jgroups.etcd.api.Node;
 import org.jgroups.etcd.api.Response;
 import org.jgroups.etcd.domain.ResponseBuilder;
-import org.jgroups.etcd.raft.EtcdStateMachine;
+import org.jgroups.etcd.api.raft.EtcdStateMachine;
 import org.jgroups.etcd.support.KeyNotFoundException;
 
 import java.util.Optional;
