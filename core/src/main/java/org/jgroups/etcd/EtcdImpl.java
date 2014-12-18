@@ -30,7 +30,9 @@ public class EtcdImpl implements Etcd {
 
   @Override
   public Response delete(String key) {
-    return ResponseBuilder.actionDelete(stateMachine.delete(key));
+    return ResponseBuilder.actionDelete(Optional
+        .ofNullable(stateMachine.delete(key))
+        .orElseThrow(() -> new KeyNotFoundException(key, 100L, "Key not found", -1L)));
   }
 
 }
