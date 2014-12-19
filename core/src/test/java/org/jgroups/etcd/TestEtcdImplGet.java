@@ -2,7 +2,7 @@ package org.jgroups.etcd;
 
 import org.jgroups.etcd.api.Node;
 import org.jgroups.etcd.api.Response;
-import org.jgroups.etcd.api.raft.EtcdStateMachine;
+import org.jgroups.etcd.raft.api.EtcdStateMachine;
 import org.jgroups.etcd.support.KeyNotFoundException;
 import org.junit.Assert;
 import org.junit.Test;

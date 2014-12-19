@@ -3,18 +3,20 @@ package org.jgroups.etcd.rest;
 import org.jgroups.etcd.EtcdImpl;
 import org.jgroups.etcd.api.Etcd;
 import org.jgroups.etcd.api.Response;
-import org.jgroups.etcd.api.raft.EtcdStateMachine;
-import org.jgroups.etcd.support.ServiceFactory;
+import org.jgroups.etcd.raft.api.EtcdStateMachine;
+import org.jgroups.etcd.raft.configuration.JGroupsConfigurationBuilder;
 
 import javax.ws.rs.*;
 
 @Path("/v2/keys")
 public class EtcdJaxRS implements Etcd {
 
-  private final Etcd etcd;
+  private Etcd etcd;
+
+  private EtcdStateMachine stateMachine;
 
   public EtcdJaxRS() {
-    EtcdStateMachine stateMachine = ServiceFactory.<EtcdStateMachine>loadFactory(EtcdStateMachine.class);
+    stateMachine = new JGroupsConfigurationBuilder().build();
     etcd = new EtcdImpl(stateMachine);
   }
 

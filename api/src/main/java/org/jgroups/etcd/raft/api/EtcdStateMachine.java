@@ -1,4 +1,4 @@
-package org.jgroups.etcd.api.raft;
+package org.jgroups.etcd.raft.api;
 
 import org.jgroups.etcd.api.Node;
 
