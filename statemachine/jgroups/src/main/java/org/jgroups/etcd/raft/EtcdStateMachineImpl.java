@@ -2,11 +2,12 @@ package org.jgroups.etcd.raft;
 
 import org.jgroups.etcd.api.Node;
 import org.jgroups.etcd.raft.api.EtcdStateMachine;
+import org.jgroups.etcd.raft.command.GET;
 import org.jgroups.protocols.raft.RAFT;
 import org.jgroups.protocols.raft.StateMachine;
+import org.jgroups.util.Util;
 
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 public class EtcdStateMachineImpl implements EtcdStateMachine, StateMachine {
 
@@ -18,7 +19,34 @@ public class EtcdStateMachineImpl implements EtcdStateMachine, StateMachine {
 
   @Override
   public Node get(String key) {
-    throw new UnsupportedOperationException("Not yet implemented.");
+    GET get = new GET();
+    try {
+      byte[] buff = Util.objectToByteBuffer(get);
+      byte[] apply = apply(buff, 0, buff.length);
+      return new Node() {
+        @Override
+        public Long getCreatedIndex() {
+          return 0L;
+        }
+
+        @Override
+        public Long getModifiedIndex() {
+          return 0L;
+        }
+
+        @Override
+        public String getKey() {
+          return key;
+        }
+
+        @Override
+        public String getValue() {
+          return "GET";
+        }
+      };
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
   }
 
   @Override

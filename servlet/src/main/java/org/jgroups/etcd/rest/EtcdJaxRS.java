@@ -7,12 +7,13 @@ import org.jgroups.etcd.raft.api.EtcdStateMachine;
 import org.jgroups.etcd.raft.configuration.JGroupsConfigurationBuilder;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Application;
 
+@ApplicationPath("/")
 @Path("/v2/keys")
-public class EtcdJaxRS implements Etcd {
+public class EtcdJaxRS extends Application implements Etcd {
 
   private Etcd etcd;
-
   private EtcdStateMachine stateMachine;
 
   public EtcdJaxRS() {
