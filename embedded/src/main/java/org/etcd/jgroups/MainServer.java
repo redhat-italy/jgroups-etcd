@@ -16,7 +16,7 @@ public class MainServer {
         tjws.setDeployment(deployment);
         tjws.setBindAddress(TestPortProvider.getHost());
         tjws.setPort(TestPortProvider.getPort());
-        tjws.setRootResourcePath("");
+        //tjws.setRootResourcePath("");
         tjws.setSecurityDomain(null);
         tjws.start();
     }
