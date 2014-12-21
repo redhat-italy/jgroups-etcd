@@ -22,7 +22,8 @@ public class EtcdStateMachineImpl implements EtcdStateMachine, StateMachine {
     GET get = new GET();
     try {
       byte[] buff = Util.objectToByteBuffer(get);
-      byte[] apply = apply(buff, 0, buff.length);
+      //byte[] apply = apply(buff, 0, buff.length);
+      apply(buff, 0, buff.length);
       return new Node() {
         @Override
         public Long getCreatedIndex() {
@@ -60,8 +61,8 @@ public class EtcdStateMachineImpl implements EtcdStateMachine, StateMachine {
   }
 
   @Override
-  public byte[] apply(byte[] data, int offset, int length) throws Exception {
-    return new byte[0];
+  public void apply(byte[] data, int offset, int length) /*throws Exception*/ {
+    //return new byte[0];
   }
 
   @Override
