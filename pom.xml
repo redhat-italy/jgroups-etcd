@@ -98,6 +98,7 @@
     <module>api</module>
     <module>core</module>
     <module>servlet</module>
+    <module>embedded</module>
     <module>statemachine/jgroups</module>
   </modules>
 
