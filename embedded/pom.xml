@@ -29,8 +29,8 @@
 
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxrs-all</artifactId>
-            <version>3.0.8.Final</version>
+            <artifactId>resteasy-jaxrs</artifactId>
+            <version>3.0.10.Final</version>
         </dependency>
 
     </dependencies>
