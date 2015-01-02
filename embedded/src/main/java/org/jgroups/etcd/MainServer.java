@@ -43,7 +43,7 @@ public class MainServer extends Application {
     deployment.setApplication(new MainServer());
     tjws.setDeployment(deployment);
     tjws.setBindAddress(TestPortProvider.getHost());
-    tjws.setPort(9000);
+    tjws.setPort(TestPortProvider.getPort());
     tjws.setSecurityDomain(null);
     tjws.start();
   }
