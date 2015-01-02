@@ -47,7 +47,7 @@ public class EtcdStateMachineImpl implements EtcdStateMachine, StateMachine {
 
   @Override
   public Node delete(String key) {
-    throw new UnsupportedOperationException("Not yet implemented.");
+    return new EtcdNode(key, values.remove(key));
   }
 
   @Override
