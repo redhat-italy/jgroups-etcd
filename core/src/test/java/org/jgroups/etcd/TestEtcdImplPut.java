@@ -3,6 +3,7 @@ package org.jgroups.etcd;
 import org.jgroups.etcd.api.Node;
 import org.jgroups.etcd.api.Response;
 import org.jgroups.etcd.raft.api.EtcdStateMachine;
+import org.jgroups.etcd.raft.api.EtcdStateMachineClient;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,7 +18,7 @@ public class TestEtcdImplPut {
     String value = "value";
 
     Node expected = mock(Node.class);
-    EtcdStateMachine stateMachine = mock(EtcdStateMachine.class);
+    EtcdStateMachineClient stateMachine = mock(EtcdStateMachineClient.class);
 
     when(stateMachine.put(key, value)).thenReturn(expected);
 

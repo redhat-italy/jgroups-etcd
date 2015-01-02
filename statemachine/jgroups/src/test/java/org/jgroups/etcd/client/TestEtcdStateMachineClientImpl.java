@@ -4,6 +4,7 @@ import org.jgroups.etcd.DummyNode;
 import org.jgroups.etcd.api.Node;
 import org.jgroups.etcd.raft.api.EtcdStateMachine;
 import org.jgroups.protocols.raft.Settable;
+import org.jgroups.util.Util;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -47,12 +48,13 @@ public class TestEtcdStateMachineClientImpl {
 
     try {
       DummyNode expected = new DummyNode();
+      byte[] buffer = Util.objectToByteBuffer(expected);
 
-      when(stateMachine.put(anyString(), anyString())).thenReturn(expected);
+      when(raft.set(anyObject(), eq(0), anyInt())).thenReturn(buffer);
 
       Node node = machine.put(key, value);
 
-      verify(stateMachine, only()).put(eq(key), eq(value));
+      verifyZeroInteractions(stateMachine);
       verify(raft, only()).set(anyObject(), eq(0), anyInt());
 
       Assert.assertEquals(expected, node);
@@ -72,12 +74,13 @@ public class TestEtcdStateMachineClientImpl {
 
     try {
       DummyNode expected = new DummyNode();
+      byte[] buffer = Util.objectToByteBuffer(expected);
 
-      when(stateMachine.delete(anyString())).thenReturn(expected);
+      when(raft.set(anyObject(), eq(0), anyInt())).thenReturn(buffer);
 
       Node node = machine.delete(key);
 
-      verify(stateMachine, only()).delete(eq(key));
+      verifyZeroInteractions(stateMachine);
       verify(raft, only()).set(anyObject(), eq(0), anyInt());
 
       Assert.assertEquals(expected, node);

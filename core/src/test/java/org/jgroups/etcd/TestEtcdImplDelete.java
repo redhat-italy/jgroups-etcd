@@ -3,6 +3,7 @@ package org.jgroups.etcd;
 import org.jgroups.etcd.api.Node;
 import org.jgroups.etcd.api.Response;
 import org.jgroups.etcd.raft.api.EtcdStateMachine;
+import org.jgroups.etcd.raft.api.EtcdStateMachineClient;
 import org.jgroups.etcd.support.KeyNotFoundException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,7 +18,7 @@ public class TestEtcdImplDelete {
   public void testGetKeyWithKeyNotFound() {
     String key = "message";
 
-    EtcdImpl etcd = new EtcdImpl(mock(EtcdStateMachine.class));
+    EtcdImpl etcd = new EtcdImpl(mock(EtcdStateMachineClient.class));
 
     Response message = etcd.delete(key);
   }
@@ -27,7 +28,7 @@ public class TestEtcdImplDelete {
     String key = "message";
 
     Node expected = mock(Node.class);
-    EtcdStateMachine stateMachine = mock(EtcdStateMachine.class);
+    EtcdStateMachineClient stateMachine = mock(EtcdStateMachineClient.class);
 
     when(stateMachine.delete(key)).thenReturn(expected);
 

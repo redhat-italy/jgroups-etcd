@@ -3,6 +3,7 @@ package org.jgroups.etcd;
 import org.jgroups.etcd.api.Node;
 import org.jgroups.etcd.api.Response;
 import org.jgroups.etcd.raft.api.EtcdStateMachine;
+import org.jgroups.etcd.raft.api.EtcdStateMachineClient;
 import org.jgroups.etcd.support.KeyNotFoundException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,7 +15,7 @@ public class TestEtcdImplGet {
 
   @Test(expected = KeyNotFoundException.class)
   public void testGetKeyWithKeyNotFound() {
-    EtcdImpl etcd = new EtcdImpl(mock(EtcdStateMachine.class));
+    EtcdImpl etcd = new EtcdImpl(mock(EtcdStateMachineClient.class));
 
     Response message = etcd.get("message");
   }
@@ -24,7 +25,7 @@ public class TestEtcdImplGet {
     Long errorCode = 100L;
     String key = "message";
 
-    EtcdImpl etcd = new EtcdImpl(mock(EtcdStateMachine.class));
+    EtcdImpl etcd = new EtcdImpl(mock(EtcdStateMachineClient.class));
 
     try {
       etcd.get(key);
@@ -40,7 +41,7 @@ public class TestEtcdImplGet {
     String key = "message";
     Node expected = mock(Node.class);
 
-    EtcdStateMachine stateMachine = mock(EtcdStateMachine.class);
+    EtcdStateMachineClient stateMachine = mock(EtcdStateMachineClient.class);
     when(stateMachine.get(key)).thenReturn(expected);
 
     EtcdImpl etcd = new EtcdImpl(stateMachine);
