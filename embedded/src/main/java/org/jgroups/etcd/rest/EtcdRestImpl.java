@@ -4,6 +4,7 @@ import org.jgroups.etcd.EtcdImpl;
 import org.jgroups.etcd.api.Etcd;
 import org.jgroups.etcd.api.Response;
 import org.jgroups.etcd.raft.api.EtcdStateMachine;
+import org.jgroups.etcd.raft.api.EtcdStateMachineClient;
 import org.jgroups.etcd.raft.configuration.JGroupsConfigurationBuilder;
 
 import javax.ws.rs.*;
@@ -14,7 +15,7 @@ import java.util.Set;
 public class EtcdRestImpl implements Etcd {
 
   private Etcd etcd;
-  private EtcdStateMachine stateMachine;
+  private EtcdStateMachineClient stateMachine;
 
   public EtcdRestImpl() {
     stateMachine = new JGroupsConfigurationBuilder().build();

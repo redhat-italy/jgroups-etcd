@@ -37,7 +37,6 @@ public class MainServer extends Application {
 
 
   public static void main(String[] args) {
-
     System.out.println("Starting Embedded Server");
     TJWSEmbeddedJaxrsServer tjws = new TJWSEmbeddedJaxrsServer();
     ResteasyDeployment deployment = new ResteasyDeployment();

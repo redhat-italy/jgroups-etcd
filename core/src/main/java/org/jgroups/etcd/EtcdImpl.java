@@ -4,15 +4,16 @@ import org.jgroups.etcd.api.Etcd;
 import org.jgroups.etcd.api.Response;
 import org.jgroups.etcd.domain.ResponseBuilder;
 import org.jgroups.etcd.raft.api.EtcdStateMachine;
+import org.jgroups.etcd.raft.api.EtcdStateMachineClient;
 import org.jgroups.etcd.support.KeyNotFoundException;
 
 import java.util.Optional;
 
 public class EtcdImpl implements Etcd {
 
-  private final EtcdStateMachine stateMachine;
+  private final EtcdStateMachineClient stateMachine;
 
-  public EtcdImpl(EtcdStateMachine stateMachine) {
+  public EtcdImpl(EtcdStateMachineClient stateMachine) {
     this.stateMachine = stateMachine;
   }
 
